@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.808.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyBuildRestfulApis", "UdemyBuildRestfulApis.csproj", "{DF1FA84A-637F-4166-BFD1-857C54B0BDA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF1FA84A-637F-4166-BFD1-857C54B0BDA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF1FA84A-637F-4166-BFD1-857C54B0BDA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF1FA84A-637F-4166-BFD1-857C54B0BDA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF1FA84A-637F-4166-BFD1-857C54B0BDA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D63AFF8C-B6AE-4FE2-9BE0-A5E458625BF6}
+	EndGlobalSection
+EndGlobal
