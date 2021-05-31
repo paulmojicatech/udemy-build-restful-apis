@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Npgsql;
+using UdemyBuildRestfulApis.data;
 
 namespace UdemyBuildRestfulApis
 {
@@ -32,10 +35,20 @@ namespace UdemyBuildRestfulApis
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UdemyBuildRestfulApis", Version = "v1" });
             });
+
+            // Add Swagger Configuration
+            string connString = Configuration.GetSection("Postgres")["ConnString"];
+            string dbPwd = Configuration.GetSection("Postgres")["DBPwd"];
+            NpgsqlConnectionStringBuilder builder = new NpgsqlConnectionStringBuilder(connString)
+            {
+                Password = dbPwd
+            };
+            services.AddDbContext<QuotesDbContext>(option => option.UseNpgsql(builder.ConnectionString));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, QuotesDbContext quotesDbContext)
         {
             if (env.IsDevelopment())
             {
@@ -54,6 +67,9 @@ namespace UdemyBuildRestfulApis
             {
                 endpoints.MapControllers();
             });
+
+            // DI for postgres
+            quotesDbContext.Database.EnsureCreated();
         }
     }
 }
