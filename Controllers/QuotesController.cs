@@ -29,27 +29,36 @@ namespace UdemyBuildRestfulApis.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Quote Get(int id)
         {
-            return "value";
+            return _quotesDbContext.Quotes.FirstOrDefault(q => q.Id == id);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Quote quote)
         {
+            _quotesDbContext.Quotes.Add(quote);
+            _quotesDbContext.SaveChanges();
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Quote quote)
         {
+            Quote quoteToUpdate = _quotesDbContext.Quotes.Find(id);
+            quoteToUpdate.Title = quote.Title;
+            quoteToUpdate.Description = quote.Description;
+            _quotesDbContext.SaveChanges();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Quote quoteToDelete = _quotesDbContext.Quotes.Find(id);
+            _quotesDbContext.Quotes.Remove(quoteToDelete);
+            _quotesDbContext.SaveChanges();
         }
     }
 }
